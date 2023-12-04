@@ -8,6 +8,11 @@ public class BeanDefinition {
 
     private Class beanClass;
 
+    /**
+     * 构造一个BeanDefinition对象。
+     *
+     * @param beanClass Bean的类对象。
+     */
     public BeanDefinition(Class beanClass) {
         this.beanClass = beanClass;
     }
@@ -16,7 +21,4 @@ public class BeanDefinition {
         return beanClass;
     }
 
-    public void setBeanClass(Class beanClass) {
-        this.beanClass = beanClass;
-    }
 }

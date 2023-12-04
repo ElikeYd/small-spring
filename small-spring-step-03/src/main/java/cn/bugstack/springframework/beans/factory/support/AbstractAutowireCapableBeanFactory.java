@@ -32,12 +32,14 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         Constructor constructorToUse = null;
         Class<?> beanClass = beanDefinition.getBeanClass();
         Constructor<?>[] declaredConstructors = beanClass.getDeclaredConstructors();
+        //遍历所有的构造器，选出符合当前参数个数的构造器
         for (Constructor ctor : declaredConstructors) {
             if (null != args && ctor.getParameterTypes().length == args.length) {
                 constructorToUse = ctor;
                 break;
             }
         }
+        //使用cglib动态代理往构造器注入构造参数
         return getInstantiationStrategy().instantiate(beanDefinition, beanName, constructorToUse, args);
     }
 

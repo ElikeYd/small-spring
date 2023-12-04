@@ -9,7 +9,9 @@ import java.util.Map;
  * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  */
 public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
-
+    /**
+     * 存放bean的容器
+     */
     private final Map<String, Object> singletonObjects = new HashMap<>();
 
     @Override

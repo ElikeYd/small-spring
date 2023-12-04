@@ -10,7 +10,9 @@ import java.util.Map;
  * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  */
 public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFactory implements BeanDefinitionRegistry {
-
+    /**
+     * 在这一部分中，beanDefinition 用于描述 Bean 的作用域，以及 Bean 的类型。相当于bean的元信息
+     */
     private final Map<String, BeanDefinition> beanDefinitionMap = new HashMap<>();
 
     @Override
