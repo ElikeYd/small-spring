@@ -22,6 +22,11 @@ public interface ConfigurableListableBeanFactory extends ListableBeanFactory, Au
 
     BeanDefinition getBeanDefinition(String beanName) throws BeansException;
 
+    /**
+     * 预实例化所有单例Bean。
+     * 
+     * @throws BeansException 如果在预实例化单例Bean时发生异常
+     */
     void preInstantiateSingletons() throws BeansException;
 
 }

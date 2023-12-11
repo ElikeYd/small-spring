@@ -1,5 +1,8 @@
 package cn.bugstack.springframework.core.io;
 
+/**
+ * 资源加载接口
+ */
 public interface ResourceLoader {
 
     /**

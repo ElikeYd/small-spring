@@ -18,13 +18,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
+ * 解析XML处理Bean注册
  * Bean definition reader for XML bean definitions.
- *
- *
- *
- *
- *
- *
  * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  */
 public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
@@ -37,6 +32,11 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
         super(registry, resourceLoader);
     }
 
+    /**
+     * 加载Bean定义的方法。
+     * @param resource 要加载的资源
+     * @throws BeansException 如果解析XML文档时发生IOException或ClassNotFoundException，则抛出BeansException
+     */
     @Override
     public void loadBeanDefinitions(Resource resource) throws BeansException {
         try (InputStream inputStream = resource.getInputStream()){
@@ -60,6 +60,13 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
         loadBeanDefinitions(resource);
     }
 
+    /**
+     * 解析xml文件
+     *主要是对xml的读取 XmlUtil.readXML(inputStream) 和元素 Element 解析。在解析的过程中通过循环操作，以此获取 Bean 配置以及配置中的 id、name、class、value、ref 信息。
+     * 最终把读取出来的配置信息，创建成 BeanDefinition 以及 PropertyValue，最终把完整的 Bean 定义内容注册到 Bean 容器：getRegistry().registerBeanDefinition(beanName, beanDefinition)
+     * @param inputStream 输入流，用于读取XML文件。
+     * @throws ClassNotFoundException 如果类未找到，则抛出ClassNotFoundException异常。
+     */
     protected void doLoadBeanDefinitions(InputStream inputStream) throws ClassNotFoundException {
         Document doc = XmlUtil.readXML(inputStream);
         Element root = doc.getDocumentElement();

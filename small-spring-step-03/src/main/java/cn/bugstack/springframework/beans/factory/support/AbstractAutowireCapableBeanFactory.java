@@ -35,7 +35,16 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         //遍历所有的构造器，选出符合当前参数个数的构造器
         for (Constructor ctor : declaredConstructors) {
             if (null != args && ctor.getParameterTypes().length == args.length) {
-                constructorToUse = ctor;
+                Boolean match =true;
+                //按照别人的思路，补上构造参数属性类型的对比
+                for (int i = 0; i < ctor.getParameterTypes().length; i++) {
+                    Class parameterType = ctor.getParameterTypes()[i];
+                    //判断参数args[i]的值是不是parameterType的实例
+                    if (!parameterType.isInstance(args[i])) {
+                        match = false;
+                    }
+                }
+                constructorToUse =match?ctor:null;
                 break;
             }
         }

@@ -6,7 +6,9 @@ import cn.hutool.core.lang.Assert;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-
+/**
+ * 解析classpath的文件资源
+ */
 public class ClassPathResource implements Resource {
 
     private final String path;

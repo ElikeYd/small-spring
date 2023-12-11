@@ -48,7 +48,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
     }
 
     /**
-     * Bean 属性填充
+     * Bean 属性填充，此时的bean已经通过cglib创建好了
      */
     protected void applyPropertyValues(String beanName, Object bean, BeanDefinition beanDefinition) {
         try {
@@ -58,12 +58,21 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
                 String name = propertyValue.getName();
                 Object value = propertyValue.getValue();
 
+                //通过工具类，获取在这个bean中属性名为{name}的值，如果存在，说明构造函数的时候已经注入了这个值了，不能进行覆盖
+                //这里只是作为一个写法的增强思考，其实我个人感觉增加这个限制不是很合理
+                Object fieldValue = BeanUtil.getFieldValue(bean, name);
+                if (Objects.nonNull(fieldValue)){
+                    continue;
+                }
+
+                //如果值是某个对象引用
                 if (value instanceof BeanReference) {
                     // A 依赖 B，获取 B 的实例化
                     BeanReference beanReference = (BeanReference) value;
+                    //在bean容器中根据bean的名字获取bean，如果不存在会根据beanDefinitionMap中的信息创建bean返回并放入容器
                     value = getBean(beanReference.getBeanName());
                 }
-                // 属性填充
+                // 通过反射进行属性填充
                 BeanUtil.setFieldValue(bean, name, value);
             }
         } catch (Exception e) {

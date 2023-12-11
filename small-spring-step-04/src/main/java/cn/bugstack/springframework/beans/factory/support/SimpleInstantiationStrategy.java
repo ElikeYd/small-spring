@@ -7,6 +7,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 /**
+ * 使用java的反射创建对象
  * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  */
 public class SimpleInstantiationStrategy implements InstantiationStrategy {
