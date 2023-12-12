@@ -122,10 +122,14 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
     private void invokeInitMethods(String beanName, Object bean, BeanDefinition beanDefinition) throws Exception {
         // 1. 实现接口 InitializingBean
         if (bean instanceof InitializingBean) {
+            //执行当前bean的afterPropertiesSet方法
             ((InitializingBean) bean).afterPropertiesSet();
         }
 
         // 2. 注解配置 init-method {判断是为了避免二次执行初始化}
+        //在代码中，通过判断 initMethodName 是否为空，并且 bean 对象没有实现 InitializingBean 接口，来确定是否需要执行初始化方法。
+        //这个判断是为了避免在对象已经实现了 InitializingBean 接口的情况下，再次执行初始化方法。因为如果对象已经实现了 InitializingBean 接口，
+        // 它的初始化逻辑应该已经在 afterPropertiesSet() 方法中处理了。所以这个判断是为了避免重复执行初始化的逻辑。
         String initMethodName = beanDefinition.getInitMethodName();
         if (StrUtil.isNotEmpty(initMethodName) && !(bean instanceof InitializingBean)) {
             Method initMethod = beanDefinition.getBeanClass().getMethod(initMethodName);
