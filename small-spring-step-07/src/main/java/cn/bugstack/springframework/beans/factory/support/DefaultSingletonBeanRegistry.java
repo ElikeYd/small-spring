@@ -15,6 +15,10 @@ public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
 
     private Map<String, Object> singletonObjects = new HashMap<>();
 
+    /**
+     * 用于保存实现了 DisposableBean 接口的 Bean 对象
+     * key：beanName     value：DisposableBeanAdapter bean
+     */
     private final Map<String, DisposableBean> disposableBeans = new HashMap<>();
 
     @Override
@@ -26,6 +30,12 @@ public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
         singletonObjects.put(beanName, singletonObject);
     }
 
+    /**
+     * 注册一个可销毁的Bean。
+     *
+     * @param beanName Bean的名称
+     * @param bean 可销毁的Bean对象
+     */
     public void registerDisposableBean(String beanName, DisposableBean bean) {
         disposableBeans.put(beanName, bean);
     }
@@ -36,6 +46,7 @@ public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
         
         for (int i = disposableBeanNames.length - 1; i >= 0; i--) {
             Object beanName = disposableBeanNames[i];
+            //具体类型是DisposableBeanAdapter，有适配器来决定具体采用哪种销毁方式
             DisposableBean disposableBean = disposableBeans.remove(beanName);
             try {
                 disposableBean.destroy();
@@ -44,5 +55,4 @@ public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
             }
         }
     }
-
 }

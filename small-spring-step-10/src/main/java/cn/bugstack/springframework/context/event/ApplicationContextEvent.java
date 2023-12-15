@@ -4,13 +4,9 @@ import cn.bugstack.springframework.context.ApplicationContext;
 import cn.bugstack.springframework.context.ApplicationEvent;
 
 /**
+ * ApplicationContext事件基类
+ *
  * Base class for events raised for an <code>ApplicationContext</code>.
- *
- *
- *
- *
- *
- *
  * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  */
 public class ApplicationContextEvent extends ApplicationEvent {

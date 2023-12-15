@@ -28,13 +28,14 @@ public class DisposableBeanAdapter implements DisposableBean {
 
     @Override
     public void destroy() throws Exception {
-        // 1. 实现接口 DisposableBean
+        // 1. 当前bean 实现了接口 DisposableBean，直接调用他的destroy方法
         if (bean instanceof DisposableBean) {
             ((DisposableBean) bean).destroy();
+            return;
         }
 
-        // 2. 注解配置 destroy-method {判断是为了避免二次执行销毁}，同initMethod
-        if (StrUtil.isNotEmpty(destroyMethodName) && !(bean instanceof DisposableBean && "destroy".equals(this.destroyMethodName))) {
+        // 2. 配置 destroy-method {判断是为了避免二次执行销毁}，同initMethod；使用的配置指定销毁方法，采用反射执行当前bean的销毁方法
+        if (StrUtil.isNotEmpty(destroyMethodName)) {
             Method destroyMethod = bean.getClass().getMethod(destroyMethodName);
             if (null == destroyMethod) {
                 throw new BeansException("Couldn't find a destroy method named '" + destroyMethodName + "' on bean with name '" + beanName + "'");

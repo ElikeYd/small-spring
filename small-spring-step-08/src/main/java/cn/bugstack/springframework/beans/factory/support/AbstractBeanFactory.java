@@ -55,6 +55,7 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
 
     @Override
     public void addBeanPostProcessor(BeanPostProcessor beanPostProcessor){
+        //移除旧的放新的
         this.beanPostProcessors.remove(beanPostProcessor);
         this.beanPostProcessors.add(beanPostProcessor);
     }

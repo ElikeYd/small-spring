@@ -11,13 +11,13 @@ import java.util.EventListener;
  *
  *
  *
- *
+ * 监听器
  * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  */
 public interface ApplicationListener<E extends ApplicationEvent> extends EventListener {
 
     /**
-     * Handle an application event.
+     * Handle an application event.  ： 处理应用程序事件；也就是这个监听器监听到相应事件时执行相应的处理逻辑
      * @param event the event to respond to
      */
     void onApplicationEvent(E event);

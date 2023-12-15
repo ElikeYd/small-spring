@@ -105,7 +105,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
     private Object initializeBean(String beanName, Object bean, BeanDefinition beanDefinition) {
 
-        // invokeAwareMethods
+        // invokeAwareMethods，建立关联
         if (bean instanceof Aware) {
             if (bean instanceof BeanFactoryAware) {
                 ((BeanFactoryAware) bean).setBeanFactory(this);
@@ -136,7 +136,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
     private void invokeInitMethods(String beanName, Object bean, BeanDefinition beanDefinition) throws Exception {
         // 1. 实现接口 InitializingBean
         if (bean instanceof InitializingBean) {
-            ((InitializingBean) bean).afterPropertiesSet();
+            ((InitializingBean) bean).init();
         }
 
         // 2. 注解配置 init-method {判断是为了避免二次执行销毁}

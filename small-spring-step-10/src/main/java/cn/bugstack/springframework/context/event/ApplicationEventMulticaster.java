@@ -4,15 +4,10 @@ import cn.bugstack.springframework.context.ApplicationEvent;
 import cn.bugstack.springframework.context.ApplicationListener;
 
 /**
+ * ApplicationContext事件广播器
+ *
  * Interface to be implemented by objects that can manage a number of
  * {@link ApplicationListener} objects, and publish events to them.
- *
- * 事件广播器
- *
- *
- *
- *
- *
  *
  * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  */
@@ -31,6 +26,8 @@ public interface ApplicationEventMulticaster {
     void removeApplicationListener(ApplicationListener<?> listener);
 
     /**
+     * 将给定的应用程序事件广播给适当的监听器。
+     *
      * Multicast the given application event to appropriate listeners.
      * @param event the event to multicast
      */

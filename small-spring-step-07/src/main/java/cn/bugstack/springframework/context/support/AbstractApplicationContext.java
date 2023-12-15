@@ -87,8 +87,14 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
         return getBeanFactory().getBean(name, requiredType);
     }
 
+    /**
+     * 注册一个关闭钩子，以在JVM关闭时执行关闭操作。
+     *
+     * @throws SecurityException 如果安全管理器存在并且它不允许添加关闭挂钩，或者关闭挂钩已经被添加但已被关闭
+     */
     @Override
     public void registerShutdownHook() {
+        // 添加 JVM 关闭时的钩子方法，用于关闭应用上下文
         Runtime.getRuntime().addShutdownHook(new Thread(this::close));
     }
 

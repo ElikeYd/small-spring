@@ -30,7 +30,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 
     public JdbcTemplate(DataSource dataSource) {
         setDataSource(dataSource);
-        afterPropertiesSet();
+        init();
     }
 
 

@@ -1,13 +1,14 @@
 package cn.bugstack.springframework.test.bean;
 
 import cn.bugstack.springframework.beans.BeansException;
+import cn.bugstack.springframework.beans.factory.BeanClassLoaderAware;
 import cn.bugstack.springframework.context.ApplicationContext;
 import cn.bugstack.springframework.context.ApplicationContextAware;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserDao{
+public class UserDao implements BeanClassLoaderAware {
 
     private static Map<String, String> hashMap = new HashMap<>();
 
@@ -27,4 +28,8 @@ public class UserDao{
         return hashMap.get(uId);
     }
 
+    @Override
+    public void setBeanClassLoader(ClassLoader classLoader) {
+        System.out.println("userDao:"+classLoader);
+    }
 }

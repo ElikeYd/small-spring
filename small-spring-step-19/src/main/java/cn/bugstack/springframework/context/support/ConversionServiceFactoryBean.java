@@ -52,7 +52,7 @@ public class ConversionServiceFactoryBean implements FactoryBean<ConversionServi
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void init() throws Exception {
         this.conversionService = new DefaultConversionService();
         registerConverters(converters, conversionService);
     }

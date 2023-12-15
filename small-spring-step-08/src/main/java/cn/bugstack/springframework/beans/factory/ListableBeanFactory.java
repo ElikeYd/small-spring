@@ -15,7 +15,7 @@ import java.util.Map;
  *
  *
  *
- *
+ * 可列举的Bean工厂
  * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  */
 public interface ListableBeanFactory extends BeanFactory{

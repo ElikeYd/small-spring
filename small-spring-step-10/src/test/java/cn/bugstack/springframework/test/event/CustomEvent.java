@@ -2,6 +2,9 @@ package cn.bugstack.springframework.test.event;
 
 import cn.bugstack.springframework.context.event.ApplicationContextEvent;
 
+/**
+ * 自定义事件
+ */
 public class CustomEvent extends ApplicationContextEvent {
 
     private Long id;

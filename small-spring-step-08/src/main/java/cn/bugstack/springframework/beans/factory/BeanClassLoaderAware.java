@@ -9,7 +9,7 @@ package cn.bugstack.springframework.beans.factory;
  *
  *
  *
- *
+ * ClassLoader的作用：将外部字节码文件加载成java类
  * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  */
 public interface BeanClassLoaderAware extends Aware{

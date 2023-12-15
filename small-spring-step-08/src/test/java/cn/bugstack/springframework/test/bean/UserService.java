@@ -2,13 +2,14 @@ package cn.bugstack.springframework.test.bean;
 
 import cn.bugstack.springframework.beans.BeansException;
 import cn.bugstack.springframework.beans.factory.*;
+import cn.bugstack.springframework.beans.factory.config.BeanPostProcessor;
 import cn.bugstack.springframework.context.ApplicationContext;
 import cn.bugstack.springframework.context.ApplicationContextAware;
 
 /**
  * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  */
-public class UserService implements BeanNameAware, BeanClassLoaderAware, ApplicationContextAware, BeanFactoryAware {
+public class UserService implements BeanNameAware, BeanClassLoaderAware, ApplicationContextAware, BeanFactoryAware, BeanPostProcessor {
 
     private ApplicationContext applicationContext;
     private BeanFactory beanFactory;
@@ -83,4 +84,14 @@ public class UserService implements BeanNameAware, BeanClassLoaderAware, Applica
         return beanFactory;
     }
 
+    @Override
+    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+        System.out.println("执行userService的后置处理器啦");
+        return null;
+    }
+
+    @Override
+    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        return null;
+    }
 }

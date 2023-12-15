@@ -29,7 +29,7 @@ public class DataSourceTransactionManager extends AbstractPlatformTransactionMan
 
     public DataSourceTransactionManager(DataSource dataSource) {
         setDataSource(dataSource);
-        afterPropertiesSet();
+        init();
     }
 
     public void setDataSource(DataSource dataSource) {
@@ -106,7 +106,7 @@ public class DataSourceTransactionManager extends AbstractPlatformTransactionMan
     }
 
     @Override
-    public void afterPropertiesSet() {
+    public void init() {
         if (null == getDataSource()) {
             throw new IllegalArgumentException("Property 'datasource' is required");
         }
